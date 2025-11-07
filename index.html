@@ -6,127 +6,173 @@
     <title>Jiwon Lee Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- 기본 스타일 --- */
+        /* 기본 스타일 설정 */
         :root {
-            --sidebar-width: 280px; /* 사이드바 너비 약간 줄임 */
+            --sidebar-width: 300px;
             --main-color: #2c3e50;
             --accent-color: #3498db;
             --text-color: #333;
-            --bg-color: #f9f9f9;
-            --section-bg: #ffffff;
+            --bg-color: #f4f7f6;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: var(--text-color);
-            line-height: 1.7;
+            line-height: 1.6;
             background-color: var(--bg-color);
         }
-        a { text-decoration: none; color: var(--accent-color); }
-        a:hover { text-decoration: underline; }
+        a { text-decoration: none; color: inherit; }
 
-        /* --- 사이드바 스타일 --- */
+        /* 왼쪽 사이드바 스타일 */
         .sidebar {
             position: fixed;
             width: var(--sidebar-width);
             height: 100vh;
             background: var(--main-color);
             color: white;
-            padding: 30px 20px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow-y: auto; /* 메뉴가 길어지면 스크롤 가능하게 */
-            z-index: 100;
+            text-align: center;
+            z-index: 100; /* 모바일에서 메뉴가 위에 오도록 */
         }
-        /* 스크롤바 숨기기 (크롬, 사파리 등) */
-        .sidebar::-webkit-scrollbar { display: none; }
-        .sidebar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .sidebar-header { text-align: center; margin-bottom: 20px; }
         .profile-image {
-            width: 120px; height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background-color: #ddd;
-            margin: 0 auto 15px;
-            border: 4px solid rgba(255,255,255,0.1);
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255,255,255,0.1);
+            /* GitHub 프로필 사진 자동 연동 */
             background-image: url('https://github.com/SkantFocs.png');
-            background-size: cover; background-position: center;
+            background-size: cover;
+            background-position: center;
         }
-        .sidebar h1 { font-size: 1.6rem; margin-bottom: 5px; }
-        .sidebar p { font-size: 0.85rem; opacity: 0.8; line-height: 1.4; }
-
-        .nav-menu { list-style: none; flex-grow: 1; }
-        .nav-menu li { margin-bottom: 8px; }
+        .sidebar h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .sidebar p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        .nav-menu {
+            list-style: none;
+            margin-top: 30px;
+        }
+        .nav-menu li {
+            margin-bottom: 15px;
+        }
         .nav-menu a {
             color: rgba(255,255,255,0.7);
+            transition: 0.3s;
             display: block;
-            padding: 8px 10px;
-            border-radius: 5px;
-            transition: 0.2s;
-            font-size: 0.95rem;
-            text-decoration: none;
+            padding: 5px;
         }
-        .nav-menu a:hover { color: white; background: rgba(255,255,255,0.1); }
-
-        .social-links { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .nav-menu a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
         .social-links a {
-            width: 36px; height: 36px;
+            width: 40px;
+            height: 40px;
             background: rgba(255,255,255,0.1);
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; transition: 0.3s; color: white; text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
         }
-        .social-links a:hover { background: var(--accent-color); }
+        .social-links a:hover {
+            background: var(--accent-color);
+        }
 
-        /* --- 메인 콘텐츠 스타일 --- */
+        /* 메인 콘텐츠 영역 스타일 */
         .main-content {
             margin-left: var(--sidebar-width);
-            padding: 40px 60px;
+            padding: 60px 80px; /* 좌우 여백 조정 */
         }
         section {
-            background: var(--section-bg);
-            padding: 40px;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            scroll-margin-top: 20px; /* 스크롤 시 상단 여백 */
+            min-height: 80vh;
+            padding: 60px 0;
+            border-bottom: 1px solid #eee;
+            max-width: 900px; /* 콘텐츠 최대 너비 제한으로 가독성 향상 */
+            margin: 0 auto; /* 중앙 정렬 */
         }
         h2 {
-            font-size: 2rem; color: var(--main-color);
-            margin-bottom: 25px; padding-bottom: 10px;
-            border-bottom: 2px solid var(--accent-color);
+            font-size: 2.5rem;
+            color: var(--main-color);
+            margin-bottom: 40px;
+            position: relative;
         }
-        h3 { font-size: 1.4rem; color: var(--main-color); margin: 30px 0 15px; }
-        h4 { font-size: 1.1rem; color: #555; margin-bottom: 5px; }
-
-        /* 리스트 스타일 */
-        ul.normal-list { padding-left: 20px; margin-bottom: 20px; }
-        ul.normal-list li { margin-bottom: 10px; }
-
-        /* 타임라인 스타일 (Experience, Education 용) */
-        .timeline-item {
-            display: flex;
-            margin-bottom: 25px;
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
         }
-        .timeline-date {
-            min-width: 150px;
-            font-weight: bold;
-            color: var(--accent-color);
-            flex-shrink: 0;
-        }
-        .timeline-content h4 { margin-top: 0; }
 
-        /* 반응형 (모바일) */
+        /* 포트폴리오 그리드 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .project-img {
+            height: 200px;
+            background: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        .project-info {
+            padding: 25px;
+        }
+
+        /* 반응형 디자인 (모바일) */
         @media (max-width: 768px) {
             .sidebar {
-                position: relative; width: 100%; height: auto;
-                padding: 30px 20px; overflow-y: visible;
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 40px 20px;
             }
-            .main-content { margin-left: 0; padding: 20px; }
-            section { padding: 25px; }
-            .timeline-item { flex-direction: column; }
-            .timeline-date { margin-bottom: 5px; }
+            .main-content {
+                margin-left: 0;
+                padding: 40px 20px;
+            }
+            section {
+                min-height: auto;
+                padding: 40px 0;
+            }
+            h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -140,13 +186,9 @@
         </div>
 
         <ul class="nav-menu">
-            <li><a href="#about">About</a></li>
-            <li><a href="#research">Research</a></li>
-            <li><a href="#academic-work">Academic Work</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#awards">Honors & Awards</a></li>
-            <li><a href="#skills">Skills</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
 
@@ -157,111 +199,53 @@
     </nav>
 
     <main class="main-content">
+        <section id="home">
+            <h2>Hello, I'm <br><span style="color: var(--accent-color);">Jiwon Lee</span>.</h2>
+            <p style="font-size: 1.3rem; margin-top: 20px; color: #555;">
+                I am a PhD student researcher specializing in electric propulsion at The University of Tokyo.
+                Welcome to my personal portfolio where I share my research findings and projects.
+            </p>
+        </section>
 
         <section id="about">
-            <h2>Hello, I'm <span style="color: var(--accent-color);">Jiwon Lee</span>.</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                Welcome to my personal website!<br>
-                I am a PhD student in the <a href="http://www.al.t.u-tokyo.ac.jp/personnel.html" target="_blank">Komurasaki & Koizumi Laboratory</a> at the University of Tokyo.
-            </p>
+            <h2>About Me</h2>
             <p>
-                [여기에 추가적인 자기소개를 자유롭게 적으시면 됩니다. 연구 관심사나 배경 등]
+                [Write a brief introduction about yourself here. Your research interests, background, and goals.]
             </p>
-        </section>
-
-        <section id="research">
-            <h2>Research Interest</h2>
-            <p>[연구 분야에 대한 전반적인 소개를 적어주세요]</p>
-            <ul class="normal-list" style="margin-top: 20px;">
-                <li><strong>Electric Propulsion:</strong> Hall thrusters, Physics of plasmas...</li>
-                <li><strong>Numerical Simulation:</strong> PIC-DSMC, Fluid models...</li>
-                <li>[추가 연구 분야...]</li>
+            <ul style="margin-top: 30px; list-style: none; line-height: 2;">
+                <li><strong>🏛️ Affiliation:</strong> The University of Tokyo, Komurasaki & Koizumi Lab</li>
+                <li><strong>🔬 Research Interest:</strong> Electric Propulsion, Hall Thrusters, Plasma Physics</li>
+                <li><strong>📍 Location:</strong> Tokyo, Japan</li>
             </ul>
         </section>
 
-        <section id="academic-work">
-            <h2>Academic Work</h2>
-            
-            <h3>Publications (Peer-Reviewed)</h3>
-            <ul class="normal-list">
-                <li>[Publication 1 details...]</li>
-                <li>[Publication 2 details...]</li>
-            </ul>
-
-            <h3>International Conferences</h3>
-            <ul class="normal-list">
-                <li>[Conference 1 details...]</li>
-                <li>[Conference 2 details...]</li>
-            </ul>
-
-            <h3>Domestic Conferences</h3>
-            <ul class="normal-list">
-                <li>[Conference 1 details...]</li>
-            </ul>
-        </section>
-
-        <section id="experience">
-            <h2>Experience</h2>
-            <div class="timeline-item">
-                <div class="timeline-date">202X.XX - Present</div>
-                <div class="timeline-content">
-                    <h4>Position Title</h4>
-                    <p>Company/Institution Name, Location</p>
-                    <ul>
-                        <li>Description of your role and achievements.</li>
-                    </ul>
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-img" style="background-image: url('https://via.placeholder.com/400x200?text=Project+1');"></div>
+                    <div class="project-info">
+                        <h3>Research Project 1</h3>
+                        <p>Brief description of your research project. What problem did you solve and what were the key findings?</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img" style="background-image: url('https://via.placeholder.com/400x200?text=Project+2');"></div>
+                    <div class="project-info">
+                        <h3>Research Project 2</h3>
+                        <p>Description of another significant project or publication.</p>
+                    </div>
                 </div>
             </div>
-            </section>
-
-        <section id="education">
-            <h2>Education</h2>
-            <div class="timeline-item">
-                <div class="timeline-date">202X - Present</div>
-                <div class="timeline-content">
-                    <h4>Ph.D. in Aeronautics and Astronautics</h4>
-                    <p>The University of Tokyo, Japan</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">20XX - 20XX</div>
-                <div class="timeline-content">
-                    <h4>M.S. in [Your Major]</h4>
-                    <p>[University Name], [Location]</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="awards">
-            <h2>Honors & Awards</h2>
-            <ul class="normal-list">
-                <li><strong>Award Name</strong> - Issuing Organization (Year)</li>
-                <li><strong>Scholarship Name</strong> - Organization (Year)</li>
-            </ul>
-        </section>
-
-        <section id="skills">
-            <h2>Skills</h2>
-            <ul class="normal-list">
-                <li><strong>Languages:</strong> Korean (Native), English (Fluent), Japanese (Intermediate)</li>
-                <li><strong>Programming:</strong> C++, Python, MATLAB, Fortran</li>
-                <li><strong>Tools:</strong> OpenFOAM, Paraview, LaTeX</li>
-            </ul>
-        </section>
-
-        <section id="etc">
-            <h2>Etc</h2>
-            <p>[기타 활동, 취미, 자격증 등 자유롭게 기술]</p>
         </section>
 
         <section id="contact">
-            <h2>Contact</h2>
-            <p>
-                📧 Email: <a href="mailto:l.jiwon@al.t.u-tokyo.ac.jp">l.jiwon@al.t.u-tokyo.ac.jp</a><br>
-                🔗 LinkedIn: <a href="https://www.linkedin.com/in/jiwon-lee-57b282325/" target="_blank">Jiwon Lee</a>
+            <h2>Get In Touch</h2>
+            <p>Feel free to reach out for collaborations or any inquiries regarding my research.</p>
+            <p style="margin-top: 20px; font-size: 1.2rem;">
+                📧 <a href="mailto:l.jiwon@al.t.u-tokyo.ac.jp" style="color: var(--accent-color); text-decoration: underline;">l.jiwon@al.t.u-tokyo.ac.jp</a>
             </p>
         </section>
-
     </main>
 
 </body>
