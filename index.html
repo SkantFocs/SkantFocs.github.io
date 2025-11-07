@@ -8,12 +8,12 @@
     <style>
         /* --- 기본 스타일 --- */
         :root {
-            --sidebar-width: 280px; /* 사이드바 너비 약간 줄임 */
+            --sidebar-width: 280px;
             --main-color: #2c3e50;
             --accent-color: #3498db;
             --text-color: #333;
-            --bg-color: #f9f9f9;
-            --section-bg: #ffffff;
+            --bg-color: #ffffff; /* 전체 배경을 흰색으로 변경하여 깔끔하게 */
+            --light-gray: #f4f4f4;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -37,95 +37,96 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow-y: auto; /* 메뉴가 길어지면 스크롤 가능하게 */
+            overflow-y: auto;
             z-index: 100;
         }
-        /* 스크롤바 숨기기 (크롬, 사파리 등) */
         .sidebar::-webkit-scrollbar { display: none; }
         .sidebar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .sidebar-header { text-align: center; margin-bottom: 20px; }
+        .sidebar-header { text-align: center; margin-bottom: 30px; }
         .profile-image {
-            width: 120px; height: 120px;
+            width: 130px; height: 130px;
             border-radius: 50%;
             background-color: #ddd;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             border: 4px solid rgba(255,255,255,0.1);
             background-image: url('https://github.com/SkantFocs.png');
             background-size: cover; background-position: center;
         }
-        .sidebar h1 { font-size: 1.6rem; margin-bottom: 5px; }
-        .sidebar p { font-size: 0.85rem; opacity: 0.8; line-height: 1.4; }
+        .sidebar h1 { font-size: 1.6rem; font-weight: 600; margin-bottom: 10px; }
+        .sidebar p { font-size: 0.85rem; opacity: 0.8; line-height: 1.5; }
 
         .nav-menu { list-style: none; flex-grow: 1; }
-        .nav-menu li { margin-bottom: 8px; }
+        .nav-menu li { margin-bottom: 5px; }
         .nav-menu a {
             color: rgba(255,255,255,0.7);
             display: block;
-            padding: 8px 10px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 8px;
             transition: 0.2s;
             font-size: 0.95rem;
-            text-decoration: none;
         }
         .nav-menu a:hover { color: white; background: rgba(255,255,255,0.1); }
 
-        .social-links { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
         .social-links a {
-            width: 36px; height: 36px;
+            width: 38px; height: 38px;
             background: rgba(255,255,255,0.1);
             display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; transition: 0.3s; color: white; text-decoration: none;
+            border-radius: 50%; transition: 0.3s; color: white; font-size: 1.1rem;
         }
         .social-links a:hover { background: var(--accent-color); }
 
         /* --- 메인 콘텐츠 스타일 --- */
         .main-content {
             margin-left: var(--sidebar-width);
-            padding: 40px 60px;
+            padding: 0; /* 전체 패딩 제거 */
         }
+        /* 섹션 스타일: 흰색 박스 제거, 구분선 추가 */
         section {
-            background: var(--section-bg);
-            padding: 40px;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            scroll-margin-top: 20px; /* 스크롤 시 상단 여백 */
+            padding: 60px 80px; /* 내부 여백을 충분히 줌 */
+            border-bottom: 1px solid #eee; /* 섹션 간 얇은 구분선 */
         }
+        /* 마지막 섹션은 구분선 제거 */
+        section:last-child { border-bottom: none; }
+
         h2 {
-            font-size: 2rem; color: var(--main-color);
-            margin-bottom: 25px; padding-bottom: 10px;
-            border-bottom: 2px solid var(--accent-color);
+            font-size: 2.2rem; color: var(--main-color);
+            margin-bottom: 30px; position: relative;
         }
-        h3 { font-size: 1.4rem; color: var(--main-color); margin: 30px 0 15px; }
-        h4 { font-size: 1.1rem; color: #555; margin-bottom: 5px; }
+        /* 제목 아래 짧은 밑줄 포인트 */
+        h2::after {
+            content: ''; position: absolute; left: 0; bottom: -10px;
+            width: 50px; height: 4px; background: var(--accent-color); border-radius: 2px;
+        }
 
-        /* 리스트 스타일 */
+        h3 { font-size: 1.5rem; color: var(--main-color); margin: 40px 0 20px; }
+        h4 { font-size: 1.2rem; color: #444; margin-bottom: 8px; font-weight: 600; }
+
+        /* 이모티콘 리스트 스타일 (About 섹션용) */
+        ul.emoji-list { list-style: none; margin-top: 25px; padding: 20px; background: var(--light-gray); border-radius: 10px; }
+        ul.emoji-list li { margin-bottom: 12px; display: flex; align-items: center; }
+        ul.emoji-list li span.icon { margin-right: 12px; font-size: 1.2rem; }
+        ul.emoji-list li strong { margin-right: 8px; color: var(--main-color); }
+
+        /* 일반 리스트 스타일 */
         ul.normal-list { padding-left: 20px; margin-bottom: 20px; }
-        ul.normal-list li { margin-bottom: 10px; }
+        ul.normal-list li { margin-bottom: 8px; }
 
-        /* 타임라인 스타일 (Experience, Education 용) */
+        /* 타임라인 스타일 */
         .timeline-item {
-            display: flex;
-            margin-bottom: 25px;
+            display: flex; margin-bottom: 40px;
         }
         .timeline-date {
-            min-width: 150px;
-            font-weight: bold;
-            color: var(--accent-color);
-            flex-shrink: 0;
+            min-width: 180px; font-weight: 600; color: var(--accent-color); flex-shrink: 0;
         }
-        .timeline-content h4 { margin-top: 0; }
 
-        /* 반응형 (모바일) */
+        /* 반응형 */
         @media (max-width: 768px) {
-            .sidebar {
-                position: relative; width: 100%; height: auto;
-                padding: 30px 20px; overflow-y: visible;
-            }
-            .main-content { margin-left: 0; padding: 20px; }
-            section { padding: 25px; }
-            .timeline-item { flex-direction: column; }
+            .sidebar { position: relative; width: 100%; height: auto; padding: 40px 20px; overflow-y: visible; }
+            .main-content { margin-left: 0; }
+            section { padding: 40px 25px; }
+            .timeline-item { flex-direction: column; margin-bottom: 30px; }
             .timeline-date { margin-bottom: 5px; }
         }
     </style>
@@ -141,7 +142,7 @@
 
         <ul class="nav-menu">
             <li><a href="#about">About</a></li>
-            <li><a href="#research">Research</a></li>
+            <li><a href="#research">Research Interest</a></li>
             <li><a href="#academic-work">Academic Work</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#education">Education</a></li>
@@ -151,31 +152,45 @@
         </ul>
 
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/jiwon-lee-57b282325/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:l.jiwon@al.t.u-tokyo.ac.jp" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/jiwon-lee-57b282325/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:l.jiwon@al.t.u-tokyo.ac.jp"><i class="fas fa-envelope"></i></a>
         </div>
     </nav>
 
     <main class="main-content">
 
-        <section id="about">
-            <h2>Hello, I'm <span style="color: var(--accent-color);">Jiwon Lee</span>.</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                Welcome to my personal website!<br>
-                I am a PhD student in the <a href="http://www.al.t.u-tokyo.ac.jp/personnel.html" target="_blank">Komurasaki & Koizumi Laboratory</a> at the University of Tokyo.
+        <section id="about" style="padding-top: 100px;"> <h2>Hello, I'm <span style="color: var(--accent-color);">Jiwon Lee</span>.</h2>
+            <p style="font-size: 1.2rem; margin: 30px 0 20px;">
+                Welcome to my personal website! <br>
+                I am a PhD student researcher passionate about advancing space propulsion technologies.
             </p>
-            <p>
-                [여기에 추가적인 자기소개를 자유롭게 적으시면 됩니다. 연구 관심사나 배경 등]
-            </p>
+            
+            <ul class="emoji-list">
+                <li>
+                    <span class="icon">🏛️</span>
+                    <strong>Affiliation:</strong>
+                    <a href="http://www.al.t.u-tokyo.ac.jp/personnel.html" target="_blank">The University of Tokyo, Komurasaki & Koizumi Lab</a>
+                </li>
+                <li>
+                    <span class="icon">🔬</span>
+                    <strong>Research Interest:</strong>
+                    Electric Propulsion, Hall Thrusters, Plasma Physics
+                </li>
+                <li>
+                    <span class="icon">📍</span>
+                    <strong>Location:</strong>
+                    Tokyo, Japan
+                </li>
+            </ul>
         </section>
 
         <section id="research">
             <h2>Research Interest</h2>
-            <p>[연구 분야에 대한 전반적인 소개를 적어주세요]</p>
-            <ul class="normal-list" style="margin-top: 20px;">
-                <li><strong>Electric Propulsion:</strong> Hall thrusters, Physics of plasmas...</li>
-                <li><strong>Numerical Simulation:</strong> PIC-DSMC, Fluid models...</li>
-                <li>[추가 연구 분야...]</li>
+            <p>My research focuses on the numerical and experimental analysis of Hall thrusters to improve their performance and lifetime.</p>
+            <ul class="normal-list" style="margin-top: 30px;">
+                <li><strong>Electric Propulsion:</strong> Physics of Hall thrusters, Alternative propellants (Argon, etc.)</li>
+                <li><strong>Numerical Simulation:</strong> Developing Particle-in-Cell Direct Simulation Monte Carlo (PIC-DSMC) codes</li>
+                <li><strong>Diagnostics:</strong> Plasma diagnostics using electrostatic probes and optical emission spectroscopy</li>
             </ul>
         </section>
 
@@ -184,19 +199,19 @@
             
             <h3>Publications (Peer-Reviewed)</h3>
             <ul class="normal-list">
-                <li>[Publication 1 details...]</li>
-                <li>[Publication 2 details...]</li>
+                <li>[Paper Title 1], <em>Journal Name</em>, Year. (doi link)</li>
+                <li>[Paper Title 2], <em>Journal Name</em>, Year.</li>
             </ul>
 
             <h3>International Conferences</h3>
             <ul class="normal-list">
-                <li>[Conference 1 details...]</li>
-                <li>[Conference 2 details...]</li>
+                <li><strong>J. Lee</strong>, et al., "[Presentation Title]", <em>39th International Electric Propulsion Conference (IEPC 2025)</em>, London, UK, Sep. 2025.</li>
+                <li>[Author list], "[Presentation Title]", <em>[Conference Name]</em>, [Location], [Date].</li>
             </ul>
 
             <h3>Domestic Conferences</h3>
             <ul class="normal-list">
-                <li>[Conference 1 details...]</li>
+                <li>[Author list], "[Presentation Title]", <em>[Conference Name]</em>, [Date].</li>
             </ul>
         </section>
 
@@ -205,14 +220,15 @@
             <div class="timeline-item">
                 <div class="timeline-date">202X.XX - Present</div>
                 <div class="timeline-content">
-                    <h4>Position Title</h4>
-                    <p>Company/Institution Name, Location</p>
-                    <ul>
-                        <li>Description of your role and achievements.</li>
+                    <h4>Research Assistant</h4>
+                    <p>The University of Tokyo, Japan</p>
+                    <ul class="normal-list">
+                        <li>Conducted numerical simulations for Hall thruster plasma using OpenFOAM.</li>
+                        <li>Assisted in vacuum chamber experiments for propulsion system testing.</li>
                     </ul>
                 </div>
             </div>
-            </section>
+        </section>
 
         <section id="education">
             <h2>Education</h2>
@@ -227,7 +243,14 @@
                 <div class="timeline-date">20XX - 20XX</div>
                 <div class="timeline-content">
                     <h4>M.S. in [Your Major]</h4>
-                    <p>[University Name], [Location]</p>
+                    <p>[University Name], [Country]</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">20XX - 20XX</div>
+                <div class="timeline-content">
+                    <h4>B.S. in [Your Major]</h4>
+                    <p>[University Name], [Country]</p>
                 </div>
             </div>
         </section>
@@ -235,30 +258,27 @@
         <section id="awards">
             <h2>Honors & Awards</h2>
             <ul class="normal-list">
-                <li><strong>Award Name</strong> - Issuing Organization (Year)</li>
-                <li><strong>Scholarship Name</strong> - Organization (Year)</li>
+                <li><strong>Outstanding Research Award</strong> - [Organization Name] (202X)</li>
+                <li><strong>Global Ph.D. Fellowship</strong> - [Organization Name] (202X-202X)</li>
             </ul>
         </section>
 
         <section id="skills">
             <h2>Skills</h2>
             <ul class="normal-list">
-                <li><strong>Languages:</strong> Korean (Native), English (Fluent), Japanese (Intermediate)</li>
-                <li><strong>Programming:</strong> C++, Python, MATLAB, Fortran</li>
-                <li><strong>Tools:</strong> OpenFOAM, Paraview, LaTeX</li>
+                <li><strong>Languages:</strong> Korean (Native), English (Fluent), Japanese (Conversational)</li>
+                <li><strong>Programming & Tools:</strong> C++, Python, MATLAB, OpenFOAM, ParaView, LaTeX</li>
+                <li><strong>Experimental:</strong> Vacuum chamber operation, Plasma diagnostics (Langmuir probe)</li>
             </ul>
         </section>
 
-        <section id="etc">
-            <h2>Etc</h2>
-            <p>[기타 활동, 취미, 자격증 등 자유롭게 기술]</p>
-        </section>
-
-        <section id="contact">
-            <h2>Contact</h2>
+        <section id="contact" style="background-color: var(--light-gray); border-bottom: none;"> <h2>Contact</h2>
             <p>
+                Feel free to contact me for any inquiries or collaboration opportunities.
+            </p>
+            <p style="margin-top: 20px; font-size: 1.1rem;">
                 📧 Email: <a href="mailto:l.jiwon@al.t.u-tokyo.ac.jp">l.jiwon@al.t.u-tokyo.ac.jp</a><br>
-                🔗 LinkedIn: <a href="https://www.linkedin.com/in/jiwon-lee-57b282325/" target="_blank">Jiwon Lee</a>
+                🔗 LinkedIn: <a href="https://www.linkedin.com/in/jiwon-lee-57b282325/" target="_blank">linkedin.com/in/jiwon-lee</a>
             </p>
         </section>
 
