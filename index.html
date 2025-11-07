@@ -3,63 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkantFocs의 홈페이지</title>
+    <title>SkantFocs Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
+        /* 기본 스타일 설정 */
+        :root {
+            --sidebar-width: 300px;
+            --main-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f4f7f6;
         }
-        header {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--bg-color);
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* 왼쪽 사이드바 스타일 */
+        .sidebar {
+            position: fixed;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--main-color);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             text-align: center;
-            padding: 50px 0;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #ddd; /* 프로필 사진 들어갈 자리 */
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255,255,255,0.1);
+            background-image: url('https://via.placeholder.com/150'); /* 임시 이미지 */
+            background-size: cover;
+            background-position: center;
+        }
+        .sidebar h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .nav-menu {
+            list-style: none;
+            margin-top: 30px;
+        }
+        .nav-menu li {
+            margin-bottom: 15px;
+        }
+        .nav-menu a {
+            color: rgba(255,255,255,0.7);
+            transition: 0.3s;
+            display: block;
+            padding: 5px;
+        }
+        .nav-menu a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .social-links a:hover {
+            background: var(--accent-color);
+        }
+
+        /* 메인 콘텐츠 영역 스타일 */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 60px 100px;
+        }
+        section {
+            min-height: 80vh; /* 한 섹션이 화면을 어느정도 차지하도록 */
+            padding: 60px 0;
             border-bottom: 1px solid #eee;
         }
-        h1 { color: #2c3e50; }
-        .content { padding: 30px 0; }
-        .profile-section {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+        h2 {
+            font-size: 2.5rem;
+            color: var(--main-color);
+            margin-bottom: 40px;
+            position: relative;
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            font-size: 0.8em;
-            color: #666;
-            border-top: 1px solid #eee;
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+        }
+
+        /* 포트폴리오 그리드 예시 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        .project-img {
+            height: 200px;
+            background: #ddd;
+        }
+        .project-info {
+            padding: 25px;
+        }
+
+        /* 모바일 대응 (화면이 좁아지면 사이드바가 위로 감) */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 30px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 30px;
+            }
+            section {
+                min-height: auto;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>환영합니다! 👋</h1>
-        <p>SkantFocs의 개인 포트폴리오 및 블로그입니다.</p>
-    </header>
 
-    <div class="content">
-        <section class="profile-section">
-            <h2>자기 소개</h2>
-            <p>안녕하세요, 이곳은 저의 프로젝트와 연구 기록들을 모아두는 공간입니다.</p>
-            <ul>
-                <li>관심 분야: 웹 개발, 인공지능, 데이터 분석</li>
-                <li>연락처: 본인의 이메일 주소</li>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="profile-image" style="background-image: url('https://github.com/SkantFocs.png');"></div>
+            <h1>SkantFocs</h1>
+            <p>Web Developer & Researcher</p>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="social-links">
+            <a href="https://github.com/SkantFocs" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:본인이메일@example.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section id="home">
+            <h2>안녕하세요, <br><span style="color: var(--accent-color);">SkantFocs</span> 입니다.</h2>
+            <p style="font-size: 1.2rem; margin-top: 20px;">
+                이곳은 저의 연구 결과와 개발 프로젝트를 기록하는 개인 포트폴리오 웹사이트입니다.<br>
+                데이터 분석과 웹 기술을 통해 유의미한 가치를 만들어내는 것에 관심이 많습니다.
+            </p>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                [여기에 본인 소개를 자유롭게 작성하세요. 어떤 공부를 했고, 어떤 경험이 있는지 서술하면 좋습니다.]
+            </p>
+            <ul style="margin-top: 30px; list-style: none;">
+                <li><strong>🎓 학력:</strong> OO대학교 OO전공</li>
+                <li><strong>💻 기술 스택:</strong> Python, JavaScript, HTML/CSS</li>
+                <li><strong>📍 위치:</strong> Seoul, Korea</li>
             </ul>
         </section>
 
-        <section>
-            <h2>최근 프로젝트</h2>
-            <p>준비 중입니다...</p>
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #eee;">
+                        </div>
+                    <div class="project-info">
+                        <h3>프로젝트 제목 1</h3>
+                        <p>프로젝트에 대한 간단한 설명입니다. 어떤 문제를 해결했고 어떤 기술을 사용했는지 적어보세요.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img" style="background-color: #ccc;"></div>
+                    <div class="project-info">
+                        <h3>프로젝트 제목 2</h3>
+                        <p>여기도 다른 프로젝트 설명을 적을 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
         </section>
-    </div>
 
-    <footer>
-        © 2025 SkantFocs. All rights reserved.
-    </footer>
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p>새로운 기회나 협업에 대해 논의하고 싶으시다면 언제든 연락 주세요.</p>
+            <p style="margin-top: 20px; font-size: 1.2rem;">
+                📧 <a href="mailto:yours@email.com" style="color: var(--accent-color);">yours@email.com</a>
+            </p>
+        </section>
+    </main>
+
 </body>
 </html>
