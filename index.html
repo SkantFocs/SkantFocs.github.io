@@ -100,7 +100,14 @@
             width: 50px; height: 4px; background: var(--accent-color); border-radius: 2px;
         }
 
-        h3 { font-size: 1.5rem; color: var(--main-color); margin: 40px 0 20px; }
+        h3 { 
+        font-size: 1.5rem; 
+        color: var(--main-color); 
+        margin: 40px 0 20px; 
+        /* 👇 이 두 줄을 추가/수정하여 왼쪽 여백을 제거합니다 👇 */
+        padding-left: 0; 
+        margin-left: 0;
+        }
         h4 { font-size: 1.2rem; color: #444; margin-bottom: 8px; font-weight: 600; }
 
         /* 이모티콘 리스트 스타일 (About 섹션용) */
