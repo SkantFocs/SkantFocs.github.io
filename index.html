@@ -1,389 +1,739 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Jiwon Lee Portfolio</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+
         /* --- 기본 스타일 --- */
+
         :root {
+
             --sidebar-width: 280px;
+
             --main-color: #2c3e50;
+
             --accent-color: #3498db;
+
             --text-color: #333;
+
             --bg-color: #ffffff; /* 전체 배경을 흰색으로 변경하여 깔끔하게 */
+
             --light-gray: #f4f4f4;
+
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         html { scroll-behavior: smooth; }
+
         body {
+
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
             color: var(--text-color);
+
             line-height: 1.7;
+
             background-color: var(--bg-color);
+
         }
+
         a { text-decoration: none; color: var(--accent-color); }
+
         a:hover { text-decoration: underline; }
 
+
+
         /* --- 사이드바 스타일 --- */
+
         .sidebar {
+
             position: fixed;
+
             width: var(--sidebar-width);
+
             height: 100vh;
+
             background: var(--main-color);
+
             color: white;
+
             padding: 30px 20px;
+
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
+
             overflow-y: auto;
+
             z-index: 100;
+
         }
+
         .sidebar::-webkit-scrollbar { display: none; }
+
         .sidebar { -ms-overflow-style: none; scrollbar-width: none; }
 
+
+
         .sidebar-header { text-align: center; margin-bottom: 30px; }
+
         .profile-image {
+
             width: 130px; height: 130px;
+
             border-radius: 50%;
+
             background-color: #ddd;
+
             margin: 0 auto 20px;
+
             border: 4px solid rgba(255,255,255,0.1);
+
             background-image: url('https://github.com/SkantFocs.png');
+
             background-size: cover; background-position: center;
+
         }
+
         .sidebar h1 { font-size: 1.6rem; font-weight: 600; margin-bottom: 10px; }
+
         .sidebar p { font-size: 0.85rem; opacity: 0.8; line-height: 1.5; }
 
+
+
         .nav-menu { list-style: none; flex-grow: 1; }
+
         .nav-menu li { margin-bottom: 5px; }
+
         .nav-menu a {
+
             color: rgba(255,255,255,0.7);
+
             display: block;
+
             padding: 10px 15px;
+
             border-radius: 8px;
+
             transition: 0.2s;
+
             font-size: 0.95rem;
+
         }
+
         .nav-menu a:hover { color: white; background: rgba(255,255,255,0.1); }
 
+
+
         .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+
         .social-links a {
+
             width: 38px; height: 38px;
+
             background: rgba(255,255,255,0.1);
+
             display: flex; align-items: center; justify-content: center;
+
             border-radius: 50%; transition: 0.3s; color: white; font-size: 1.1rem;
+
         }
+
         .social-links a:hover { background: var(--accent-color); }
 
+
+
         /* --- 메인 콘텐츠 스타일 --- */
+
         .main-content {
+
             margin-left: var(--sidebar-width);
+
             padding: 0; /* 전체 패딩 제거 */
+
         }
+
         /* 섹션 스타일: 흰색 박스 제거, 구분선 추가 */
+
         section {
+
             padding: 60px 80px; /* 내부 여백을 충분히 줌 */
+
             border-bottom: 1px solid #eee; /* 섹션 간 얇은 구분선 */
+
         }
+
         /* 마지막 섹션은 구분선 제거 */
+
         section:last-child { border-bottom: none; }
 
+
+
         h2 {
+
             font-size: 2.2rem; color: var(--main-color);
+
             margin-bottom: 30px; position: relative;
-        }
-        /* 제목 아래 짧은 밑줄 포인트 */
-        h2::after {
-            content: ''; position: absolute; left: 0; bottom: -10px;
-            width: 50px; height: 4px; background: var(--accent-color); border-radius: 2px;
+
         }
 
-h3 {
-    font-size: 1.5rem;
-    color: var(--main-color);
-    /* 👇 이 부분을 수정: 위쪽 마진을 주고 왼쪽 마진/패딩 제거 */
-    margin: 40px 0 20px;
-    padding-left: 0;
-    margin-left: 0;
-}
+        /* 제목 아래 짧은 밑줄 포인트 */
+
+        h2::after {
+
+            content: ''; position: absolute; left: 0; bottom: -10px;
+
+            width: 50px; height: 4px; background: var(--accent-color); border-radius: 2px;
+
+        }
+
+
+
+        h3 { font-size: 1.5rem; color: var(--main-color); margin: 40px 0 20px; }
+
         h4 { font-size: 1.2rem; color: #444; margin-bottom: 8px; font-weight: 600; }
 
+
+
         /* 이모티콘 리스트 스타일 (About 섹션용) */
+
         ul.emoji-list { list-style: none; margin-top: 25px; padding: 20px; background: var(--light-gray); border-radius: 10px; }
+
         ul.emoji-list li { margin-bottom: 12px; display: flex; align-items: center; }
+
         ul.emoji-list li span.icon { margin-right: 12px; font-size: 1.2rem; }
+
         ul.emoji-list li strong { margin-right: 8px; color: var(--main-color); }
 
+
+
         /* 일반 리스트 스타일 */
-ul.normal-list { 
-    list-style: disc; /* 점(bullet) 유지 */
-    padding-left: 20px; 
-    margin-bottom: 20px; 
-    margin-left: 0;
-}
+
+        ul.normal-list { padding-left: 20px; margin-bottom: 20px; }
+
         ul.normal-list li { margin-bottom: 8px; }
-ol.normal-list {
-    list-style: decimal; /* 숫자(decimal) 유지 */
-    padding-left: 20px; /* 목록 항목을 40px 들여쓰기 */
-    margin-bottom: 20px;
-    margin-left: 0;
-}
-                ol.normal-list li { margin-bottom: 8px; }
-        
+
+
+
         /* 타임라인 스타일 */
+
         .timeline-item {
+
             display: flex; margin-bottom: 40px;
+
         }
+
         .timeline-date {
+
             min-width: 180px; font-weight: 600; color: var(--accent-color); flex-shrink: 0;
+
         }
+
+
 
         /* 반응형 */
+
         @media (max-width: 768px) {
+
             .sidebar { position: relative; width: 100%; height: auto; padding: 40px 20px; overflow-y: visible; }
+
             .main-content { margin-left: 0; }
+
             section { padding: 40px 25px; }
+
             .timeline-item { flex-direction: column; margin-bottom: 30px; }
+
             .timeline-date { margin-bottom: 5px; }
+
         }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <nav class="sidebar">
+
         <div class="sidebar-header">
+
             <div class="profile-image"></div>
+
             <h1>Jiwon Lee</h1>
+
             <p>PhD Student<br>Komurasaki & Koizumi Lab<br>The University of Tokyo</p>
+
         </div>
+
+
 
         <ul class="nav-menu">
+
             <li><a href="#about">About</a></li>
+
             <li><a href="#research">Research Interest</a></li>
+
             <li><a href="#academic-work">Academic Work</a></li>
+
             <li><a href="#experience">Experience</a></li>
+
             <li><a href="#education">Education</a></li>
+
             <li><a href="#awards">Honors & Awards</a></li>
+
             <li><a href="#skills">Skills</a></li>
+
             <li><a href="#Else">Else</a></li>
+
             <li><a href="#contact">Contact</a></li>
+
         </ul>
 
+
+
         <div class="social-links">
+
             <a href="https://www.linkedin.com/in/jiwon-lee-57b282325/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+
             <a href="mailto:l.jiwon@al.t.u-tokyo.ac.jp"><i class="fas fa-envelope"></i></a>
+
         </div>
+
     </nav>
+
+
 
     <main class="main-content">
 
+
+
         <section id="about" style="padding-top: 100px;"> <h2>Hello, I'm <span style="color: var(--accent-color);">Jiwon Lee</span>.</h2>
+
             <p style="font-size: 1.2rem; margin: 30px 0 20px;">
+
                 Welcome to my personal website! <br>
+
                 I am a PhD student in the Komurasaki & Koizumi Laboratory at the University of Tokyo.
+
             </p>
+
             
+
             <ul class="emoji-list">
+
                 <li>
+
                     <span class="icon">🏛️</span>
+
                     <strong>Affiliation:</strong>
+
                     <a href="http://www.al.t.u-tokyo.ac.jp/personnel.html" target="_blank">The University of Tokyo, Komurasaki & Koizumi Lab</a>
+
                 </li>
+
                 <li>
+
                     <span class="icon">🔬</span>
+
                     <strong>Research Interest:</strong>
+
                     Electric Propulsion, Hall Thrusters, Rarefied gas dynamics, DSMC method
+
                 </li>
+
                 <li>
+
                     <span class="icon">📍</span>
+
                     <strong>Location:</strong>
+
                     Tokyo, Japan
+
                 </li>
+
             </ul>
+
         </section>
+
         <section id="research">
+
             <h2>Research Interest</h2>
+
             <p>My research focuses on the numerical and experimental analysis of Argon Hall thrusters to improve their performance and lifetime.</p>
+
             <ul class="normal-list" style="margin-top: 30px;">
+
                 <li><strong>Electric Propulsion:</strong> Neutral flow dynamics in Hall thrusters, Alternative propellants (Argon, etc.)</li>
+
                 <li><strong>Numerical Simulation:</strong> Developing Direct Simulation Monte Carlo (DSMC) codes</li>
+
                
+
             </ul>
+
         </section>
+
+
 
         <section id="academic-work">
+
             <h2>Academic Work</h2>
+
            
+
             <h3>Publications (Peer-Reviewed)</h3>
+
             <ol class="normal-list">
+
                 <li><strong><u>J. Lee</u></strong>, et al., “Numerical Analysis of Rarefied Gas Flow Dominated by Wall Reflection in a Straight Channel,” <em>Vacuum</em>, 2025, <a href="https://doi.org/10.1016/j.vacuum.2025.114930" target="_blank">doi: 10.1016/j.vacuum.2025.114930</a></li>
+
                 <li>D. Satpathy, H. Sekine, <strong><u>J. Lee</u></strong>, et al., "Influence of propellant injection directionality on the performance of an argon Hall thruster",
+
                     <em>Journal of Applied Physics, American Institute of Physics Publishing</em>, 2024, <a href="https://doi.org/10.1063/5.0241386" target="_blank">doi: 10.1063/5.0241386</a> </li>
+
             </ul>
+
  
+
 <h3>International Conferences</h3>
+
 <ol class="normal-list">
+
     
+
     <li><strong><u>J. Lee</u></strong>, et al., "Numerical Analysis for the Design Optimization of Sawtooth-Shaped Channels for Enhanced Reverse Flow", <em>78th Annual Gaseous Electronics Conference
+
 </em>,Seoul, Republic of Korea, Oct, 2025. (Oral)</li>
 
+
+
     <li><strong><u>J. Lee</u></strong>, et al., "Control of Neutral Gas Flow in a Hollow Anode of Hall Thrusters", <em>39th International Electric Propulsion Conference</em>, London, UK, Sep, 2025. (Poster)</li>
+
     <li>D. Satpathy, H. Sekine, <strong><u>J. Lee</u></strong>, et al., "Enhancement of neutral particle density by propellant reversal through a sawtooth hollow anode", <em>39th International Electric Propulsion Conference</em>, London, UK, Sep, 2025. (Oral)</li>
+
     <li>D. Satpathy, H. Sekine, <strong><u>J. Lee</u></strong>, et al., "Difference in plasma potential profiles between xenon and argon propellants in RAIJIN-66", <em>39th International Electric Propulsion Conference</em>, London, UK, Sep, 2025. (Oral)</li>
+
     <li>N. Barth, D. Satpathy, <strong><u>J. Lee</u></strong>, et al., "Magnetohydrodynamic Analysis of High-Density Plasma Hall Thruster Operation", <em>39th International Electric Propulsion Conference</em>, London, UK, Sep, 2025. (Oral)</li>
 
+
+
     <li><strong><u>J. Lee</u></strong>, et al., "Neutral Gas Flow Dynamics in a Hall thruster Dominated by Wall Reflections", <em>35th International Symposium on Space Technology and Science</em>, Tokushima, Japan, Jul, 2025. (Oral)</li>
+
     <li>D. Satpathy, H. Sekine, <strong><u>J. Lee</u></strong>, et al., "An argon Hall thruster using a hollow anode with corrugated surface", <em>35th International Symposium on Space Technology and Science</em>, Tokushima, Japan, Jul, 2025. (Oral)</li>
+
     <li>N. Barth, T. Suehiro, D. Satpathy, <strong><u>J. Lee</u></strong>, et al., "Magnetohydrodynamic Analysis of High Mass Flow Rate-Induced High-Density Plasma Hall Thruster Operation", <em>12th Asian Joint Propulsion Conference</em>, Xi'an, China, Mar, 2025. (Oral)</li>
+
     <li>D. Satpathy, H. Sekine, <strong><u>J. Lee</u></strong>, et al., "Propellant Utilization Efficiency of an Argon Hall Thruster with Swirl Injection", <em>39th International Electric Propulsion Conference</em>, Toulouse, France, Jun, 2024. (Oral)</li>
+
 </ul>
+
+
+
 
 
             
+
 <h3>Domestic Conferences</h3>
+
 <ol class="normal-list">
+
     <li><strong><u>J. Lee</u></strong>, et al., "Analysis of Neutral Particle Back-flow effects on Sawtooth Walls in TAL", <em>令和7年度 宇宙輸送シンポジウム</em>, Kanagawa, Japan, Jan, 2026. (Oral, <strong><u>Accepted</u></strong>)</li>
+
     <li><strong><u>J. Lee</u></strong>, et al., "Analysis of Neutral Particle Flow Variation in the Anode and Channel According to Injection Methods", <em>令和6年度 宇宙輸送シンポジウム</em>, Kanagawa, Japan, Jan, 2025. (Oral)</li>
+
     <li><strong><u>J. Lee</u></strong>, et al., "Rarefied Gas Flow in a Channel Dominated by Wall Reflection", <em>第38回数値流体力学シンポジウム</em>, Tokyo, Japan, Dec, 2024. (Oral)</li>
+
     <li><strong><u>J. Lee</u></strong>, et al., "DSMC Numerical Analysis of Suitable Anode Length for Swirl Injection Method and Efficiency Change by Mass Flow Rate", <em>第68回宇宙科学技術連合講演会</em>, Himeji, Japan, Nov, 2024. (Poster)</li>
+
     <li><strong><u>J. Lee</u></strong>, et al., "Rarefied Gas Dynamics of a Propellant Flow Spiraling in a Channel", <em>第55回日本航空宇宙学会年会講演会</em>, Tokyo, Japan, Apr, 2024. (Oral)</li>
 
+
+
     <li>D. Satpathy, <strong><u>J. Lee</u></strong>, et al.,"Impact of active anode cooling on argon Hall thruster performance", <em>第63回航空原動機・宇宙推進講演会</em>, Sapporo, Japan, Mar, 2024. (Oral)</li>
+
     <li>D. Satpathy, H. Sekine, <strong><u>J. Lee</u></strong>, et al., "Ionization length estimation of RAIJIN66 determined from performance measurements during its thermal transient operation", <em>令和5年度 宇宙輸送シンポジウム</em>, Kanagawa, Japan, Jan, 2024. (Oral)</li>
 
+
+
     <li><strong><u>J. Lee</u></strong>, et al., "Use of Argon Propellant in a Hall Thruster for Mass Transportation", <em>第9回宇宙太陽光発電シンポジウム</em>, Kanazawa, Japan, Dec, 2023. (Oral)</li>
+
 </ul>
+
         </section>
+
+
+
 
 
         <section id="experience">
+
             <h2>Experience</h2>
+
             
+
              <div class="timeline-item">
+
                 <div class="timeline-date"> Apr. 2025 - Present</div>
+
                 <div class="timeline-content">
+
+
 
                     <h4>CFD Engineer</h4>
+
                     <p>Auxilart Co., Ltd., Japan</p>
+
                     <ul class="normal-list">
+
                         <li>Specializing in computational modeling of gas-liquid two-phase flows in industrial tanks.</li>
+
                         
+
                     </ul>
+
                 </div>
+
             </div>
+
             
+
+
 
             <div class="timeline-item">
+
                 <div class="timeline-date"> Aug. 2022 - Sep. 2022</div>
+
                 <div class="timeline-content">              
+
                     <h4>Research Internship</h4>
+
                     <p>Complex Micro-Fluids Lab, KIST(Korea Institute of Science and Technology), Republic of Korea</p>
+
                     <ul class="normal-list">
+
                         <li>Measurement of fluorescent particle velocity in microchannels through Particle Streak Velocimetry.</li>
+
                         
+
                     </ul>
+
                 </div>
+
             </div>
 
+
+
             
+
         </section>
+
+
 
         <section id="education">
+
             <h2>Education</h2>
-            <div class="timeline-item">
-                <div class="timeline-date"> Oct. 2025 - Present</div>
-                <div class="timeline-content">
-                    <h4>Ph.D. in Aeronautics and Astronautics</h4>
-                    <p>The University of Tokyo, Japan</p>
-                    <p>Department of Aeronautics and Astronautics, Graduate School of Engineering<p>
-                    <p>Advisor: Kimiya Komurasaki<p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-date"> Oct. 2023 - Sep. 2025</div>
-                <div class="timeline-content">
-                    <h4>M.S. in Aeronautics and Astronautics</h4>
-                    <p>The University of Tokyo, Japan</p>
-                    <p>Department of Aeronautics and Astronautics, Graduate School of Engineering<p>
-                    <p>Advisor: Kimiya Komurasaki<p>
-                    <p>Thesis: “Anode Design Optimization of Argon Hall Thrusters Based on DSMC Analysis of Neutral Particle Behavior”<p>
-                </div>
-            </div>
 
             <div class="timeline-item">
-                <div class="timeline-date"> Mar. 2023 - Sep. 2023</div>
+
+                <div class="timeline-date"> Oct. 2025 - Present</div>
+
                 <div class="timeline-content">
-                    <h4>Research student in Aeronautics and Astronautics</h4>
+
+                    <h4>Ph.D. in Aeronautics and Astronautics</h4>
+
                     <p>The University of Tokyo, Japan</p>
+
                     <p>Department of Aeronautics and Astronautics, Graduate School of Engineering<p>
+
                     <p>Advisor: Kimiya Komurasaki<p>
+
                 </div>
+
             </div>
+
             
+
             <div class="timeline-item">
-                <div class="timeline-date"> Mar. 2017 - Feb. 2023</div>
+
+                <div class="timeline-date"> Oct. 2023 - Sep. 2025</div>
+
                 <div class="timeline-content">
-                    <h4>B.S. in Mechanical Engineering</h4>
-                    <p>Hanyang University, Republic of Korea</p>
-                    <p>School of Mechanical Engineering<p>
-                    <p>Advisor: Rhokyun KWAK<p>
-                    <p>Thesis: “Electroconvective instability on liquid metal electrodes”<p>
+
+                    <h4>M.S. in Aeronautics and Astronautics</h4>
+
+                    <p>The University of Tokyo, Japan</p>
+
+                    <p>Department of Aeronautics and Astronautics, Graduate School of Engineering<p>
+
+                    <p>Advisor: Kimiya Komurasaki<p>
+
+                    <p>Thesis: “Anode Design Optimization of Argon Hall Thrusters Based on DSMC Analysis of Neutral Particle Behavior”<p>
+
                 </div>
+
             </div>
+
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-date"> Mar. 2023 - Sep. 2023</div>
+
+                <div class="timeline-content">
+
+                    <h4>Research student in Aeronautics and Astronautics</h4>
+
+                    <p>The University of Tokyo, Japan</p>
+
+                    <p>Department of Aeronautics and Astronautics, Graduate School of Engineering<p>
+
+                    <p>Advisor: Kimiya Komurasaki<p>
+
+                </div>
+
+            </div>
+
+            
+
+            <div class="timeline-item">
+
+                <div class="timeline-date"> Mar. 2017 - Feb. 2023</div>
+
+                <div class="timeline-content">
+
+                    <h4>B.S. in Mechanical Engineering</h4>
+
+                    <p>Hanyang University, Republic of Korea</p>
+
+                    <p>School of Mechanical Engineering<p>
+
+                    <p>Advisor: Rhokyun KWAK<p>
+
+                    <p>Thesis: “Electroconvective instability on liquid metal electrodes”<p>
+
+                </div>
+
+            </div>
+
         </section>
+
+
 
         <section id="awards">
+
             <h2>Honors & Awards</h2>
+
             <ul class="normal-list">
+
+
 
                 <li><strong>JSPS Research Fellowship for Young Scientists (DC1), Apr. 2026 - Mar. 2029</strong> - Selected by Japan Society of Promotion of Science (JSPS) (Oct 2024)</li>
+
                 <p>Most prestigious fellowship for Ph.D. students in Japan with an acceptance rate of approx. 9% (3/33 in the division), providing a three-year monthly stipend and research grant.</p>
+
                 
+
                 <li><strong>LOTTE FOUNDATION Scholarship</strong> - Selected by Lotte Foundation (Oct. 2024 - Sep. 2026)</li>
+
                 <p>Selected as the top student of the Fall 2024 cohort and honored as the representative award recipient.</p>
+
                 
+
                 <li><strong>Grand prize of 2024 Aero Future & Business Idea Competition</strong> - Issued by Hanwha Aerospace (Jul 2024)</li>
+
                  <p>Awarded the Grand Prize in the 'Future Tech' theme, ranking among the Top 3 out of 126 teams</p>
+
                 
+
                 <li><strong>The third prize of the Capstone Design Competition</strong> - Issued by Hanyang University, Republic of Korea (Jun 2022)</li>
+
                  <p>Awarded to the top 10% of graduation theses</p>
+
             </ul>
+
         </section>
+
+
 
         <section id="skills">
+
             <h2>Skills</h2>
+
             <ul class="normal-list">
+
                 <li><strong>Languages:</strong> Korean (Native), English (Fluent), Japanese (Fluent)</li>
+
                 <li><strong>Programming & Tools:</strong> C, C++, Fortran, Python, MATLAB, OpenFOAM, ParaView, AUTODESK Inventor, Ansys, LabVIEW</li>
 
+
+
             </ul>
+
         </section>
+
+
 
         <section id="Else">
+
             <h2>Else</h2>
+
             <ul class="normal-list">
+
                 <li><strong>Completed Deep Space Exploration Education Program, The University of Tokyo</strong>, Mar, 2025.</li>
+
                 <li><strong>Completed Computational Science Alliance Program, The University of Tokyo</strong>, Mar, 2025.</li>
+
                 <li><strong>Military service in Army Aviation Command, R.O.K. Army</strong>, Jul, 2020 - Jan, 2022<br>
+
                            <span style="color: #666; font-size: 0.95em;">Served as a Medium Utility Helicopter mechanic.</span></li>
+
             </ul>
+
         </section>
 
+
+
         
+
         <section id="contact" style="background-color: var(--light-gray); border-bottom: none;"> <h2>Contact</h2>
+
             <p>
+
                 Feel free to contact me for any inquiries or collaboration opportunities.
+
             </p>
+
             <p style="margin-top: 20px; font-size: 1.1rem;">
+
                 📧 Email: <a href="mailto:l.jiwon@al.t.u-tokyo.ac.jp">l.jiwon@al.t.u-tokyo.ac.jp</a><br>
+
                 🔗 LinkedIn: <a href="https://www.linkedin.com/in/jiwon-lee-57b282325/" target="_blank">linkedin.com/in/jiwon-lee</a>
+
             </p>
+
         </section>
+
+
 
     </main>
 
+
+
 </body>
+
 </html>
